@@ -1,0 +1,48 @@
+﻿增加表操作
+create 'usercontent','c'
+create 'loginlog','u'
+create 'gameratings','g'
+create 'gameratings2','g','sim','pre'
+create 'relation','r'
+create 'mpv','m'
+create 'tracku','t'
+create 'ratingarvg','arv'
+
+
+
+删除表操作
+
+disable 'usercontent'
+drop 'usercontent'
+
+disable 'loginlog'
+drop 'loginlog'
+
+disable 'gameratings'
+drop 'gameratings'
+
+disable 'gameratings2'
+drop 'gameratings2'
+
+disable 'relation'
+drop 'relation'
+
+disable 'mpv'
+drop 'mpv'
+
+disable 'tracku'
+drop 'tracku'
+
+disable 'ratingarvg'
+drop 'ratingarvg'
+
+
+修改表 
+1,为表gameratings2增加表
+disable 'gameratings2'
+alter 'gameratings2', NAME => 'sim'
+ enable 'gameratings2'
+ 
+ disable 'gameratings2'
+ alter 'gameratings2', NAME => 'pre'
+ enable 'gameratings2'

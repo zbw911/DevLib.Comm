@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6200A6FE-4535-44A5-8774-9AA438179388}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dev.Framework.FileServer</RootNamespace>
+    <AssemblyName>Dev.Framework.FileServer.Impl</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\ReleaseLib\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\..\ReleaseLib\Dev.Framework.FileServer.Impl.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ImageResizer">
+      <HintPath>..\..\..\packages\ImageResizer.3.3.3\lib\ImageResizer.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.AnimatedGifs">
+      <HintPath>..\..\..\packages\ImageResizer.Plugins.AnimatedGifs.3.3.3\lib\ImageResizer.Plugins.AnimatedGifs.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.PrettyGifs">
+      <HintPath>..\..\..\packages\ImageResizer.Plugins.PrettyGifs.3.3.3\lib\ImageResizer.Plugins.PrettyGifs.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.Watermark">
+      <HintPath>..\..\..\packages\ImageResizer.Plugins.Watermark.3.3.3\lib\ImageResizer.Plugins.Watermark.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DocFile\DocFileUploader.cs" />
+    <Compile Include="HashServer\HashImageServer.cs" />
+    <Compile Include="HashServer\HashPath.cs" />
+    <Compile Include="ImageFile\ImageUploader.cs" />
+    <Compile Include="LocalUploaderFileImpl\LocalUploadFile.cs" />
+    <Compile Include="LocalUploaderFileImpl\LocalFileKey.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShareUploaderImpl\ShareFileKey.cs" />
+    <Compile Include="ShareUploaderImpl\ShareUploadFile.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Comm\Dev.Comm.Core\Dev.Comm.Core.csproj">
+      <Project>{7fdf5d76-c1bb-48ed-b5c8-663c098cfcdd}</Project>
+      <Name>Dev.Comm.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kt.Framework.ImageServer\Dev.Framework.FileServer.csproj">
+      <Project>{4F9A6922-FE07-4E38-92D4-00ADB7F0D07C}</Project>
+      <Name>Dev.Framework.FileServer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="HttpImpl\ToDo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
