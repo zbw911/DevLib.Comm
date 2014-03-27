@@ -32,7 +32,9 @@ x64/
 *.tli
 *.tlh
 *.tmp
+
 *.log
+
 *.vspscc
 *.vssscc
 .builds
@@ -135,3 +137,7 @@ UpgradeLog*.XML
 /.nuget/Dev.Web.CompositionRootBase.1.0.4806.31117.nupkg
 /.nuget/Dev.Web.CompositionRootBase.1.0.4806.33400.nupkg
 /.nuget/Dev.Web.CompositionRootBase.1.0.4807.20145.nupkg
+
+ 
+
+
