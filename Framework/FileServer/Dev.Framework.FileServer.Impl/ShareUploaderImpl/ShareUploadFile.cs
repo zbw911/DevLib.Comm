@@ -149,6 +149,48 @@ namespace Dev.Framework.FileServer.ShareImpl
             //filehelper.DeleteFile(fileSaveInfo.dirname, fileSaveInfo.savefilename);
         }
 
+        /// <summary>
+        /// 判断文件是否存在
+        /// </summary>
+        /// <param name="fileKey"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public bool ExistFile(string fileKey, params object[] param)
+        {
+            FileSaveInfo fileSaveInfo = this._currentKey.GetFileSavePath(fileKey, param);
+
+            var filehelper = new FileHelper
+            {
+                hostIp = fileSaveInfo.FileServer.hostip,
+                password = fileSaveInfo.FileServer.password,
+                username = fileSaveInfo.FileServer.username,
+                startdirname = fileSaveInfo.FileServer.startdirname
+            };
+
+            return filehelper.ExistFile(fileSaveInfo.Dirname, fileSaveInfo.Savefilename);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileKey"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public string GetFileStorePath(string fileKey, params object[] param)
+        {
+            FileSaveInfo fileSaveInfo = this._currentKey.GetFileSavePath(fileKey, param);
+
+            var filehelper = new FileHelper
+            {
+                hostIp = fileSaveInfo.FileServer.hostip,
+                password = fileSaveInfo.FileServer.password,
+                username = fileSaveInfo.FileServer.username,
+                startdirname = fileSaveInfo.FileServer.startdirname
+            };
+
+            return filehelper.GetFileName(fileSaveInfo.Dirname, fileSaveInfo.Savefilename);
+        }
+
 
         public string UpdateFile(Stream stream, string fileKey, params object[] param)
         {

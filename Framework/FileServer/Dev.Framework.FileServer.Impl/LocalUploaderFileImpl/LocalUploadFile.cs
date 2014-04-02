@@ -42,11 +42,19 @@ namespace Dev.Framework.FileServer.LocalUploaderFileImpl
 
         private string GetFilePath(FileSaveInfo fileInfo)
         {
-            var filepath = "" + fileInfo.FileServer.startdirname + "/" + fileInfo.Dirname + "/" + fileInfo.Savefilename;
 
-            var apppath = System.AppDomain.CurrentDomain.BaseDirectory;
+            var startdirname = fileInfo.FileServer.startdirname;
 
-            filepath = filepath.Replace("|APP_BASE|", apppath);
+            var apppath = System.AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\', '/'); ;
+
+            startdirname = startdirname.Replace("|APP_BASE|", apppath);
+
+
+
+            //var filepath = "" + startdirname + "/" + fileInfo.Dirname + "/" + fileInfo.Savefilename;
+
+            var filepath = Path.Combine(startdirname, fileInfo.Dirname, fileInfo.Savefilename);
+
 
             return filepath;
         }
@@ -127,6 +135,30 @@ namespace Dev.Framework.FileServer.LocalUploaderFileImpl
 
             if (Directory.Exists(pathname))
                 Directory.Delete(pathname, true);
+        }
+
+        public bool ExistFile(string fileKey, params object[] param)
+        {
+            var fileInfo = this._currentKey.GetFileSavePath(fileKey, param);
+
+            var filepath = this.GetFilePath(fileInfo);
+
+            return File.Exists(filepath);
+        }
+
+        /// <summary>
+        /// 取得文件的物理存储位置
+        /// </summary>
+        /// <param name="fileKey"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public string GetFileStorePath(string fileKey, params object[] param)
+        {
+            var fileInfo = this._currentKey.GetFileSavePath(fileKey, param);
+
+            var filepath = this.GetFilePath(fileInfo);
+
+            return filepath;
         }
 
 

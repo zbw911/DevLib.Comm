@@ -139,6 +139,34 @@ namespace Dev.Comm.NetFile
             }
         }
 
+        /// <summary>
+        /// 文件是否存在
+        /// </summary>
+        /// <param name="dirname"></param>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public bool ExistFile(string dirname, string filename)
+        {
+            using (var iss = new IdentityScope(username, hostIp, password))
+            {
+                string filepath = GetFileName(dirname, filename);
+
+                string path = Path.GetDirectoryName(filepath);
+
+                if (!Directory.Exists(path))
+                {
+                    return false;
+                }
+
+                if (!File.Exists(filepath))
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
         public void WriteFile(string dirname, string filename, Stream stream)
         {
             using (var iss = new IdentityScope(username, hostIp, password))
@@ -191,8 +219,13 @@ namespace Dev.Comm.NetFile
 
 
 
-
-        private string GetFileName(string dirname, string filename)
+        /// <summary>
+        /// 取得文件名
+        /// </summary>
+        /// <param name="dirname"></param>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public string GetFileName(string dirname, string filename)
         {
             string filepath = @"\\" + hostIp + @"\" + startdirname + @"\" + dirname + @"\" + filename;
             return filepath;

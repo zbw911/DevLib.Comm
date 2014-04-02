@@ -57,6 +57,10 @@ namespace Dev.Framework.FileServer
         /// <returns></returns>
         string UpdateFile(byte[] bytefile, string fileKey, params object[] param);
 
+
+
+
+
         /// <summary>
         /// 根据文件Key删除文件 
         /// </summary>
@@ -72,5 +76,22 @@ namespace Dev.Framework.FileServer
         /// <param name="fileKey"></param>
         void DeltePath(string fileKey);
 
+
+        /// <summary>
+        /// 判断文件是否存在
+        /// </summary>
+        /// <param name="fileKey"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        bool ExistFile(string fileKey, params object[] param);
+
+
+        /// <summary>
+        /// 取得文件的物理存储位置
+        /// </summary>
+        /// <param name="fileKey"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        string GetFileStorePath(string fileKey, params object[] param);
     }
 }
