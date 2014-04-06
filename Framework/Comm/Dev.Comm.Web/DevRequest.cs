@@ -307,6 +307,30 @@ namespace Dev.Comm.Web
 
         #endregion
 
+
+        /// <summary>
+        /// 取得int参数，如果不存在返回 null
+        /// </summary>
+        /// <param name="strName"></param>
+        /// <returns></returns>
+        public static int? GetNullableInt(string strName)
+        {
+            var strvalue = GetString(strName, false);
+
+            if (string.IsNullOrEmpty(strvalue))
+                return null;
+
+            int outint;
+
+            var r = int.TryParse(strvalue, out outint);
+
+            if (r)
+                return outint;
+
+            return null;
+
+        }
+
         #region Float
 
         /// <summary>
