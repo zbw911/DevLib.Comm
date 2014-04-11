@@ -40,7 +40,7 @@ namespace Dev.Framework.FileServer.LocalUploaderFileImpl
 
         #region Instance Methods
 
-        private string GetFilePath(FileSaveInfo fileInfo)
+        private string GetFilePath(FileSaveInfo fileInfo, string newFilename = null)
         {
 
             var startdirname = fileInfo.FileServer.startdirname;
@@ -53,7 +53,7 @@ namespace Dev.Framework.FileServer.LocalUploaderFileImpl
 
             //var filepath = "" + startdirname + "/" + fileInfo.Dirname + "/" + fileInfo.Savefilename;
 
-            var filepath = Path.Combine(startdirname, fileInfo.Dirname, fileInfo.Savefilename);
+            var filepath = Path.Combine(startdirname, fileInfo.Dirname, newFilename ?? fileInfo.Savefilename);
 
 
             return filepath;
@@ -106,6 +106,37 @@ namespace Dev.Framework.FileServer.LocalUploaderFileImpl
             return this.UpdateFile(FileUtil.BytesToStream(bytefile), fileKey, param);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bytefile"></param>
+        /// <param name="fileKey"></param>
+        /// <param name="specifyName"></param>
+        /// <returns></returns>
+
+        public string SaveFileBySpecifyName(byte[] bytefile, string fileKey, string specifyName)
+        {
+            return SaveFileBySpecifyName(FileUtil.BytesToStream(bytefile), fileKey, specifyName);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="fileKey"></param>
+        /// <param name="specifyName"></param>
+        /// <returns></returns>
+        public string SaveFileBySpecifyName(Stream stream, string fileKey, string specifyName)
+        {
+            stream.Seek(0, SeekOrigin.Begin);
+
+            var fileInfo = this._currentKey.GetFileSavePath(fileKey);
+
+            var filepath = this.GetFilePath(fileInfo, specifyName);
+
+            FileUtil.StreamToFile(stream, filepath);
+
+            return fileKey;
+        }
         /// <summary>
         /// 根据文件Key删除文件 
         /// </summary>
