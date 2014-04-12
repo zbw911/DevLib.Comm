@@ -85,6 +85,7 @@
     <Compile Include="ReadWriteAppSettings.cs" />
     <Compile Include="Runtime\Serialization\DataContractSerializationHelper.cs" />
     <Compile Include="Php\PHPSerializationLibrary\Serializer.cs" />
+    <Compile Include="ThreadTool\ReaderWriterLock.cs" />
     <Compile Include="Utils\AsmUtil.cs" />
     <Compile Include="Utils\ChineseCode.cs" />
     <Compile Include="CodeImage.cs" />
