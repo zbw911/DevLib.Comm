@@ -111,6 +111,21 @@ namespace Dev.Comm.Web
 
         }
 
+        /// <summary>
+        /// 是否是JS访问
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsJsRequest()
+        {
+            Debug.Assert(HttpContext.Current != null);
+            var xmlhttp = HttpContext.Current.Request.Headers["X-Requested-With"];
+            if (xmlhttp == "XMLHttpRequest")
+            {
+                return true;
+            }
+            return false;
+        }
+
 
         /// <summary>
         /// 返回表单或Url参数的总个数
