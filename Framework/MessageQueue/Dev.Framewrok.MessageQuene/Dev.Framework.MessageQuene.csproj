@@ -7,8 +7,8 @@
     <ProjectGuid>{E5DB035D-51F2-4B10-B5CF-7A23102573BF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dev.Framewrok.MessageQuene</RootNamespace>
-    <AssemblyName>Dev.Framewrok.MessageQuene</AssemblyName>
+    <RootNamespace>Dev.Framework.MessageQuene</RootNamespace>
+    <AssemblyName>Dev.Framework.MessageQuene</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\..\ReleaseLib\Dev.Framewrok.MessageQuene.XML</DocumentationFile>
+    <DocumentationFile>..\..\..\ReleaseLib\Dev.Framework.MessageQuene.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>

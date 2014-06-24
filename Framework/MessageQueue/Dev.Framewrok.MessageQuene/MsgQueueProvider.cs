@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Dev.Framewrok.MessageQuene
+﻿namespace Dev.Framework.MessageQuene
 {
     /// <summary>
     /// 消息队列提供者

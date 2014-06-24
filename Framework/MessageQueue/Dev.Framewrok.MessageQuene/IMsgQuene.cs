@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Dev.Framewrok.MessageQuene
+namespace Dev.Framework.MessageQuene
 {
     public interface IMsgQuene<T>
     {

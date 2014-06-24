@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Messaging;
 
-namespace Dev.Framewrok.MessageQuene
+namespace Dev.Framework.MessageQuene
 {
     /// <summary>
     /// 微软消息队列的默认实现
@@ -67,7 +67,7 @@ namespace Dev.Framewrok.MessageQuene
 
             Message[] message = this._myQueue.GetAllMessages();
             XmlMessageFormatter formatter = new XmlMessageFormatter(new Type[] { typeof(T) });
-
+            
             List<T> list = new List<T>();
 
 

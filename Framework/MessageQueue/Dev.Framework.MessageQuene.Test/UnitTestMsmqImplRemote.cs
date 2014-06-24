@@ -1,5 +1,4 @@
 ﻿using System;
-using Dev.Framewrok.MessageQuene;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Dev.Framework.MessageQuene.Test

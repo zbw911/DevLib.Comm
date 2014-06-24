@@ -1,6 +1,6 @@
 using System;
 
-namespace Dev.Framewrok.MessageQuene
+namespace Dev.Framework.MessageQuene
 {
     public interface IMessageReceiver<T>
     {
