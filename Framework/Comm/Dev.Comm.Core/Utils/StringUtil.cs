@@ -368,8 +368,8 @@ namespace Dev.Comm.Utils
                 if (count >= len)
                     break;
             }
-            //if(count>len)//截取字符串，最后如果是半个中文，舍掉最后的半个
-            //strRe = strRe.Substring(0,strRe.Length - 1);
+            if (count > len)//截取字符串，最后如果是半个中文，舍掉最后的半个
+                strRe = strRe.Substring(0, strRe.Length - 1);
             return strRe + dot;
         }
 
