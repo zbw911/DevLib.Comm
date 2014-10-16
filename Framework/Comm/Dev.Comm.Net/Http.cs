@@ -300,7 +300,7 @@ namespace Dev.Comm.Net
             {
                 var req = (HttpWebRequest)WebRequest.Create(url);
 
-              
+
 
                 req.ServicePoint.Expect100Continue = HttpExpect100Continue == false ? true : false;
                 req.Method = "GET";
@@ -712,6 +712,11 @@ namespace Dev.Comm.Net
                 if (timeout > 1)
                 {
                     req.Timeout = timeout;
+                }
+                else
+                {
+                    req.Timeout = int.MaxValue;
+
                 }
                 if (mywebproxy.Length > 10)
                 {

@@ -57,6 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SingletonLoggerTest.cs" />
     <Compile Include="UnitTest1.cs" />
+    <Compile Include="UnitTestLog4Net.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Comm\Dev.Comm.Core\Dev.Comm.Core.csproj">
