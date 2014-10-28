@@ -59,6 +59,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HtmlTextHelper.cs" />
     <Compile Include="Http.cs" />
     <Compile Include="IPHelper.cs" />
     <Compile Include="Mail.cs" />
