@@ -263,7 +263,7 @@ namespace Dev.Comm.Utils
         /// <returns> </returns>
         public static T ConvertType<T>(object value, T defaultValue)
         {
-            return (T)ConvertToT(value, defaultValue);
+            return (T)ConvertTo(value, defaultValue);
         }
 
         /**/
@@ -275,7 +275,7 @@ namespace Dev.Comm.Utils
         /// <param name="myvalue"> 传入需要转换的值 </param>
         /// <param name="defaultValue"> 默认值 </param>
         /// <returns> </returns>
-        public static object ConvertToT<T>(object myvalue, T defaultValue)
+        public static object ConvertTo<T>(object myvalue, T defaultValue)
         {
             //TypeCode typeCode = Type.GetTypeCode(typeof(T));
             //if (myvalue == null)
