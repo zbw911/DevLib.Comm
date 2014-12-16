@@ -188,7 +188,7 @@ namespace Dev.Comm
 
         public static int CreatRandNum(int i)
         {
-            var rand = new Random();
+            var rand = new Random(GetRandomSeed());
             return rand.Next(i);
         }
 
