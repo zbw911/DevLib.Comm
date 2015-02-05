@@ -28,5 +28,15 @@ namespace Dev.Framework.MessageQuene.Test
 
             Console.WriteLine(da.Id);
         }
+
+
+        [TestMethod]
+        public void GetCount()
+        {
+            var count = MsgQueueProvider<Data>.Provider.GetMessageCount();
+
+
+            Console.WriteLine(count);
+        }
     }
 }

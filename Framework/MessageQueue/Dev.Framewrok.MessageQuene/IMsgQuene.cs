@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Dev.Framework.MessageQuene
 {
@@ -67,5 +68,35 @@ namespace Dev.Framework.MessageQuene
         /// 清空指定队列的消息
         /// </summary>
         void Clear();
+
+        /// <summary>
+        /// 取得MessageQueue队列的大小
+        /// </summary>
+        /// <returns></returns>
+        int GetMessageCount();
+
+        /// <summary>
+        /// 配置异步，建议只调用一次
+        /// </summary>
+        /// <param name="func"></param>
+        void ConfigReceiveCompleted(Action<T> func);
+
+        /// <summary>
+        /// 配置异步，建议只调用一次
+        /// </summary>
+        /// <param name="func"></param>
+        void ConfigReceiveCompleted(Action<T, IAsyncResult> func);
+
+        /// <summary>
+        /// 开始异步
+        /// </summary>
+        IAsyncResult BeginReceive();
+
+        /// <summary>
+        /// 结束异步
+        /// </summary>
+        /// <param name="asyncResult"></param>
+        /// <returns></returns>
+        T EndRecive(IAsyncResult asyncResult);
     }
 }

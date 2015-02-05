@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Management;
 using System.Messaging;
 
 namespace Dev.Framework.MessageQuene
@@ -12,7 +14,13 @@ namespace Dev.Framework.MessageQuene
     {
         private readonly string _queuePath;
         private MessageQueue _myQueue;
+        private XmlMessageFormatter formatter;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="queuePath"></param>
+        /// <param name="isLocalMachine"></param>
         public MsmqQueneImpl(string queuePath, bool isLocalMachine)
         {
             _queuePath = queuePath;
@@ -21,7 +29,11 @@ namespace Dev.Framework.MessageQuene
                 CreateIfNotExist();
 
             this._myQueue = new MessageQueue(_queuePath);
+
+            formatter = new XmlMessageFormatter(new Type[] { typeof(T) });
         }
+
+
 
         /// <summary>
         /// 创建消息队列
@@ -30,8 +42,66 @@ namespace Dev.Framework.MessageQuene
         {
             this._myQueue = MessageQueue.Create(_queuePath);
 
+
+            //this._myQueue.ReceiveCompleted += _myQueue_ReceiveCompleted;
             //throw new NotImplementedException();
+
+            _myQueue.BeginReceive();
         }
+
+        /// <summary>
+        /// 配置异步，建议只调用一次
+        /// </summary>
+        /// <param name="func"></param>
+        public void ConfigReceiveCompleted(Action<T> func)
+        {
+
+            this._myQueue.ReceiveCompleted += (sender, e) =>
+            {
+                e.Message.Formatter = formatter;
+                func((T)e.Message.Body);
+            };
+        }
+        /// <summary>
+        /// 配置异步，建议只调用一次
+        /// </summary>
+        /// <param name="func"></param>
+        public void ConfigReceiveCompleted(Action<T, IAsyncResult> func)
+        {
+
+            this._myQueue.ReceiveCompleted += (sender, e) =>
+            {
+                e.Message.Formatter = formatter;
+                func((T)e.Message.Body, e.AsyncResult);
+            };
+        }
+
+
+
+
+        /// <summary>
+        /// 开始异步
+        /// </summary>
+        public IAsyncResult BeginReceive()
+        {
+            return this._myQueue.BeginReceive();
+        }
+
+
+        /// <summary>
+        /// 结束异步
+        /// </summary>
+        /// <param name="asyncResult"></param>
+        /// <returns></returns>
+        public T EndRecive(IAsyncResult asyncResult)
+        {
+            var message = this._myQueue.EndReceive(asyncResult);
+            return (T)message.Body;
+        }
+
+
+
+
 
         public void CreateIfNotExist()
         {
@@ -55,6 +125,9 @@ namespace Dev.Framework.MessageQuene
         public void Delete()
         {
             MessageQueue.Delete(_queuePath);
+
+
+
         }
 
         /// <summary>
@@ -66,8 +139,8 @@ namespace Dev.Framework.MessageQuene
 
 
             Message[] message = this._myQueue.GetAllMessages();
-            XmlMessageFormatter formatter = new XmlMessageFormatter(new Type[] { typeof(T) });
-            
+
+
             List<T> list = new List<T>();
 
 
@@ -90,7 +163,7 @@ namespace Dev.Framework.MessageQuene
         /// <returns></returns>
         public T Peek()
         {
-            this._myQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(T) });
+
             //try
             //{
             //从队列中接收消息
@@ -126,10 +199,11 @@ namespace Dev.Framework.MessageQuene
         /// <returns></returns>
         public T Receive()
         {
-            this._myQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(T) });
+            //this._myQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(T) });
             //try
             //{
             //从队列中接收消息
+            this._myQueue.Formatter = formatter;
             Message myMessage = this._myQueue.Receive();
             T context = (T)myMessage.Body; //获取消息的内容
             return context;
@@ -156,7 +230,7 @@ namespace Dev.Framework.MessageQuene
             //{
             //连接到本地的队列
             Message myMessage = new Message();
-            myMessage.Formatter = new XmlMessageFormatter(new Type[] { typeof(T) });
+            myMessage.Formatter = formatter;
             myMessage.Body = msg;
 
             //发送消息到队列中
@@ -169,12 +243,75 @@ namespace Dev.Framework.MessageQuene
 
         }
 
+
+        protected Message PeekWithoutTimeout(MessageQueue q, Cursor cursor, PeekAction action)
+        {
+            Message ret = null;
+            try
+            {
+                ret = q.Peek(new TimeSpan(1), cursor, action);
+            }
+            catch (MessageQueueException mqe)
+            {
+                if (!mqe.Message.ToLower().Contains("timeout"))
+                {
+                    throw;
+                }
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// 取得MessageQueue队列的大小
+        /// </summary>
+        /// <returns></returns>
+        public int GetMessageCount()
+        {
+            return GetPowerShellCount();
+
+        }
+
+
         /// <summary>
         /// 清空指定队列的消息
         /// </summary>
         public void Clear()
         {
             this._myQueue.Purge();
+        }
+
+
+        private int GetPowerShellCount()
+        {
+            return GetPowerShellCount(this._queuePath, Environment.MachineName, "", "");
+        }
+        private int GetPowerShellCount(string queuePath, string machine, string username, string password)
+        {
+            var path = string.Format(@"\\{0}\root\CIMv2", machine);
+            ManagementScope scope;
+            if (string.IsNullOrEmpty(username))
+            {
+                scope = new ManagementScope(path);
+            }
+            else
+            {
+                var options = new ConnectionOptions { Username = username, Password = password };
+                scope = new ManagementScope(path, options);
+            }
+            scope.Connect();
+            if (queuePath.StartsWith(".\\")) queuePath = queuePath.Replace(".\\", string.Format("{0}\\", machine));
+
+            string queryString = String.Format("SELECT * FROM Win32_PerfFormattedData_msmq_MSMQQueue");
+            var query = new ObjectQuery(queryString);
+            var searcher = new ManagementObjectSearcher(scope, query);
+            IEnumerable<int> messageCountEnumerable =
+                from ManagementObject queue in searcher.Get()
+                select (int)(UInt64)queue.GetPropertyValue("MessagesInQueue");
+            //IEnumerable<string> messageCountEnumerable =
+            //  from ManagementObject queue in searcher.Get()
+            //  select (string)queue.GetPropertyValue("Name");
+            var x = messageCountEnumerable.First();
+            return x;
         }
     }
 }
