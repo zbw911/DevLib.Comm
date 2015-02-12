@@ -176,6 +176,13 @@ namespace Dev.Comm
             return GetTypes(typeof(T));
         }
 
+
+        public static IEnumerable<Type> GetTypes<T>(Assembly assembly)
+        {
+            var type = typeof(T);
+            return assembly.GetTypes().Where(it => type.IsAssignableFrom(it) && !it.IsInterface && !it.IsAbstract);
+        }
+
         public static IEnumerable<Type> GetTypes(string fileName)
         {
             var assembly = GetAssembly(fileName);
