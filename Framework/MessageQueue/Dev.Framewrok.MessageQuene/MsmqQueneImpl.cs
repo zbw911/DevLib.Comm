@@ -299,19 +299,27 @@ namespace Dev.Framework.MessageQuene
                 scope = new ManagementScope(path, options);
             }
             scope.Connect();
+
+
             if (queuePath.StartsWith(".\\")) queuePath = queuePath.Replace(".\\", string.Format("{0}\\", machine));
 
-            string queryString = String.Format("SELECT * FROM Win32_PerfFormattedData_msmq_MSMQQueue");
+            const string queryString = @"SELECT * FROM Win32_PerfFormattedData_msmq_MSMQQueue";
             var query = new ObjectQuery(queryString);
+
             var searcher = new ManagementObjectSearcher(scope, query);
+
+
+
             IEnumerable<int> messageCountEnumerable =
                 from ManagementObject queue in searcher.Get()
+                where String.Equals(queue.GetPropertyValue("name").ToString().Trim(), queuePath.Trim(), StringComparison.CurrentCultureIgnoreCase)
                 select (int)(UInt64)queue.GetPropertyValue("MessagesInQueue");
-            //IEnumerable<string> messageCountEnumerable =
-            //  from ManagementObject queue in searcher.Get()
-            //  select (string)queue.GetPropertyValue("Name");
-            var x = messageCountEnumerable.First();
-            return x;
+
+
+            return messageCountEnumerable.FirstOrDefault();
+
+
         }
+
     }
 }

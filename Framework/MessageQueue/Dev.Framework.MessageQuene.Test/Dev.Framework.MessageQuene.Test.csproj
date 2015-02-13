@@ -65,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dev.Framewrok.MessageQuene\Dev.Framework.MessageQuene.csproj">
-      <Project>{e5db035d-51f2-4b10-b5cf-7a23102573bf}</Project>
+      <Project>{E5DB035D-51F2-4B10-B5CF-7A23102573BF}</Project>
       <Name>Dev.Framework.MessageQuene</Name>
     </ProjectReference>
   </ItemGroup>
