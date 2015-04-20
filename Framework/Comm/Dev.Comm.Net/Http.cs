@@ -1101,7 +1101,7 @@ namespace Dev.Comm.Net
                 {
                     req.Timeout = timeout;
                 }
-                if (mywebproxy.Length > 10)
+                if (!string.IsNullOrEmpty(mywebproxy) && mywebproxy.Length > 10)
                 {
                     //WebProxy myproxy=new WebProxy("218.12.17.138:80");´úÀíÉèÖÃ
                     var myproxy = new WebProxy(mywebproxy);
@@ -1114,7 +1114,8 @@ namespace Dev.Comm.Net
                     }
                 }
 
-                if ((NetworkCredentialName.Length > 0) || (NetworkCredentialPassword.Length > 0))
+                if ((!string.IsNullOrEmpty(NetworkCredentialName) && NetworkCredentialName.Length > 0)
+                    || (!string.IsNullOrEmpty(NetworkCredentialPassword) && NetworkCredentialPassword.Length > 0))
                 {
                     var myCred = new NetworkCredential(NetworkCredentialName, NetworkCredentialPassword);
                     var myCache = new CredentialCache();
