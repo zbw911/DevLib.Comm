@@ -73,6 +73,7 @@
     <Compile Include="Core\Util\UnitTestFtpClient.cs" />
     <Compile Include="MyTestClass.cs" />
     <Compile Include="NET\HtmlTextHelper.cs" />
+    <Compile Include="NET\UnitTestHttpHelper.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Json\TestJson.cs" />

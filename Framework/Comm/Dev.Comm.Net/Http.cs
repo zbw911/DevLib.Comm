@@ -345,7 +345,7 @@ namespace Dev.Comm.Net
                 req.Headers.Add("Accept-Language", "zh-cn");
                 req.Headers.Add("Cache-Control", "no-cache");
 
-                if (Headers != null)
+                if (Headers != null && Headers.Count > 0)
                     foreach (var item in Headers)
                     {
                         //req.Headers.Set()
@@ -428,6 +428,8 @@ namespace Dev.Comm.Net
                 {
                     int i = encodeheader.IndexOf("charset=");
                     encodestr = encodeheader.Substring(i + 8);
+                    //对于 chareset=utf-8;这种类型的
+                    encodestr = encodestr.TrimEnd(';');
                 }
                 if (encoding.Trim().Length > 2)
                 {
@@ -824,6 +826,7 @@ namespace Dev.Comm.Net
                 Stream ReceiveStream = null;
                 res = (HttpWebResponse)req.GetResponse();
 
+
                 outcookieheader = req.CookieContainer.GetCookieHeader(new Uri(url));
 
                 if (outcookieheader.Length < 2)
@@ -866,6 +869,8 @@ namespace Dev.Comm.Net
                 {
                     int i = encodeheader.IndexOf("charset=");
                     encodestr = encodeheader.Substring(i + 8);
+                    //对于 chareset=utf-8;这种类型的
+                    encodestr = encodestr.TrimEnd(';');
                 }
                 if (encoding.Trim().Length > 2)
                 {

@@ -131,6 +131,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dev.Log.TestCodeConfig", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dev.Comm.Net.Mail", "Framework\Comm\Dev.Comm.Net.Mail\Dev.Comm.Net.Mail.csproj", "{347E806B-CD42-4BCF-A5C0-2BBB7513E7CB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dev.Framework.MessageQuene.RabbitMq", "Framework\MessageQueue\Dev.Framework.MessageQuene.RabbitMq\Dev.Framework.MessageQuene.RabbitMq.csproj", "{AFCBD3EF-7109-4DEA-988F-89C81E91AD87}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -309,6 +311,10 @@ Global
 		{347E806B-CD42-4BCF-A5C0-2BBB7513E7CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{347E806B-CD42-4BCF-A5C0-2BBB7513E7CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{347E806B-CD42-4BCF-A5C0-2BBB7513E7CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFCBD3EF-7109-4DEA-988F-89C81E91AD87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFCBD3EF-7109-4DEA-988F-89C81E91AD87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFCBD3EF-7109-4DEA-988F-89C81E91AD87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFCBD3EF-7109-4DEA-988F-89C81E91AD87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -361,5 +367,6 @@ Global
 		{FF1F3B2D-A647-4494-B0CD-53891792ADC4} = {4B9022B6-CD07-4212-AD28-3E4C2777DC6D}
 		{CE9FB659-FC95-467C-B0B7-514B60951385} = {923580D6-8643-448C-81C7-3F70248A6D46}
 		{347E806B-CD42-4BCF-A5C0-2BBB7513E7CB} = {BFAD3F10-2E00-4020-B451-1561D926D1EF}
+		{AFCBD3EF-7109-4DEA-988F-89C81E91AD87} = {77226D25-6CE8-4338-9844-149D5D4B29B9}
 	EndGlobalSection
 EndGlobal
