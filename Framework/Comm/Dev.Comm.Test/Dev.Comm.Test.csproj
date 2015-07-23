@@ -64,6 +64,7 @@
     <Compile Include="Core\Class1.cs" />
     <Compile Include="Core\DataStructure\CreateSequence.cs" />
     <Compile Include="Core\DataStructure\Tree.cs" />
+    <Compile Include="Core\DynamicObjectsTest.cs" />
     <Compile Include="Core\IO\UnitTest1.cs" />
     <Compile Include="Core\IO\UnitTestFileWath.cs" />
     <Compile Include="Core\Json\XmlToDynamicTest.cs" />
