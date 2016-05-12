@@ -87,7 +87,7 @@ namespace Dev.Comm
             //将"yyyy-MM-dd HH:mm:ss"格式的字符串转为"\/Date(1294499956278+0800)\/"格式  
             //或 将"yyyy-MM-ddTHH:mm:ss.xxx"格式的字符串转为"\/Date(1294499956278+0800)\/"格式  
             //string p = @"\d{4}-\d{2}-\d{2}\s\d{1,2}:\d{1,2}:\d{1,2}";
-            string p = @"\d{4}-\d{2}-\d{2}[T\s]\d{1,2}:\d{1,2}:\d{1,2}[\.]?\d{0,3}";
+            string p = @"\d{4}-\d{2}-\d{2}[T\s]\d{1,2}:\d{1,2}:\d{1,2}[\.]?\d{0,3}[Z]{0,1}";
             MatchEvaluator matchEvaluator = ConvertDateStringToJsonDate;
             var reg = new Regex(p);
             jsonString = reg.Replace(jsonString, matchEvaluator);
